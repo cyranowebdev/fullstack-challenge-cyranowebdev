@@ -17,8 +17,8 @@
 ## Funcionalidades <a name="requisites"></a>
 
 O desafio foi desenvolver uma aplicação WEB ou APP, para controlar Alunos e Professores em suas Turmas, referentes às séries do Ensino Fundamental, em uma Escola Pública.
-Baseado na descrição dos requisitos, decidi pelos seguintes perfis de usuário:
-- Admin: cria, edita e apaga escolas, além de vincular usuários diretores a UMA escola cadastrada
+Baseado na descrição dos requisitos, decidi pelos seguintes perfis de usuário (implementadas no back-end, mas poucas funcionando no front-end):
+- Admin: cria, edita e apaga escolas, além de vincular usuários diretores a uma escola cadastrada
 - Diretores: criam, editam e apagam turmas na escola, podendo vincular pessoas usuárias professoras a cada turma
 - Docentes:
   - podem ser vinculados a um número ilimitado de turmas em diversas escolas
