@@ -13,8 +13,8 @@ const CheckBox = (props) => {
       >
         <option value="">Escolha uma opção</option>
         <option value="admin">Admin</option>
-        <option value="diretor">Diretor(a)</option>
-        <option value="docente">Docente</option>
+        <option value="director">Diretor(a)</option>
+        <option value="teacher">Docente</option>
       </select>
     </label>
   );
