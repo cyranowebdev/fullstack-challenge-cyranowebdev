@@ -10,12 +10,12 @@ import '../styles/Forms.css';
 export default function Register() {
   const { tokenContext: { setToken } } = useContext(AppContext);
   const history = useHistory();
-  const [login, setLogin] = useState({ name: '', email: '', password: '' });
+  const [login, setLogin] = useState({ name: '', email: '', password: '', profile: '' });
   const [disableBtn, setDisableBtn] = useState(true);
 
   const updateLogin = (target) => {
-    if (target.type === 'checkbox') {
-      setLogin({ ...login, isVendor: target.checked });
+    if (target.type === 'select-one') {
+      setLogin({ ...login, profile: target.value });
     } else {
       setLogin({ ...login, [target.name]: target.value });
     }
@@ -46,19 +46,16 @@ export default function Register() {
           <legend>Registro</legend>
           <TextInput
             name="name"
-            testId="signup"
             value={ login.name }
             callback={ updateLogin }
           />
           <TextInput
             name="email"
-            testId="signup"
             value={ login.email }
             callback={ updateLogin }
           />
           <TextInput
             name="password"
-            testId="signup"
             value={ login.password }
             callback={ updateLogin }
           />
