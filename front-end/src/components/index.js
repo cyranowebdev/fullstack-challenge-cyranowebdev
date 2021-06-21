@@ -1,6 +1,7 @@
 export { default as Topbar } from './Topbar';
 export { default as SchoolsList } from './SchoolsList';
 export { default as SchoolCard } from './SchoolCard';
+export { default as AddSchool } from './AddSchool';
 export { default as ClientMenu } from './ClientSideMenu';
 export { default as TextInput } from './TextInput';
 export { default as CheckBox } from './CheckBox';

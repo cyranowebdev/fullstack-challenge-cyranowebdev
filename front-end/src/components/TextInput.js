@@ -12,6 +12,10 @@ const TextInput = (props) => {
     type = 'text';
     label = 'Nome';
     break;
+  case 'address':
+    type = 'text';
+    label = 'Endereço';
+    break;
   case 'email':
     type = 'email';
     label = 'Email';
@@ -19,14 +23,6 @@ const TextInput = (props) => {
   case 'password':
     type = 'password';
     label = 'Senha';
-    break;
-  case 'street':
-    type = 'text';
-    label = 'Rua';
-    break;
-  case 'house-number':
-    type = 'number';
-    label = 'Número';
     break;
   default: break;
   }

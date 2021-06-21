@@ -12,7 +12,6 @@ export default function SchoolsList() {
   useEffect(() => {
     const getSchools = async (payload) => {
       const results = await api.admin.fetchSchools(payload);
-      console.log('admin page: ', results);
       setSchools(results);
     };
     if (schools.length < 1) {

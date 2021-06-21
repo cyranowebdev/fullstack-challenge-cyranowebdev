@@ -29,7 +29,7 @@ export default function SchoolCard({ school, index }) {
       key={ `${index}-${id}` }
     >
       <section className="name">{ name }</section>
-      <span>{ address }</span>
+      <span className="address">{ address }</span>
       <span className={ statusCss }>
         {(status) ? 'Ativa' : 'Sem diretor'}
       </span>
