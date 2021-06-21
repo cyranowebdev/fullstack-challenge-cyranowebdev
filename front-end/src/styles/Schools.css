@@ -1,4 +1,4 @@
-.orders-container {
+.schools-container {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
@@ -7,7 +7,7 @@
   width: 90%;
 }
 
-.order-card {
+.school-card {
   align-items: center;
   background-color: var(--bright-element-bg-color);
   border-radius: 20px;
@@ -24,13 +24,13 @@
   -moz-box-shadow: 0px 4px 17px 0px rgba(0, 0, 0, 0.25);
 }
 
-.order-card .name {
+.school-card .name {
   font-size: 1.2em;
   font-weight: 500;
   text-align: center;
 }
 
-.order-card .total {
+.school-card .total {
   background-color: var(--tertiary-att);
   border-radius: 8px;
   font-size: 1.1em;
@@ -38,14 +38,14 @@
   padding: 10px 20px;
 }
 
-.order-card .date {
+.school-card .date {
   color: var(--tertiary-text-color);
   font-size: 1em;
   font-style: italic;
   text-align: center;
 }
 
-.order-card .status {
+.school-card .status {
   background-color: var(--secondary-att);
   border-radius: 12px;
   color: var(--bg-color);
@@ -54,14 +54,14 @@
   padding: 5px 20px 7px;
 }
 
-.order-card .status.alert {
+.school-card .status.alert {
   background-color: var(--alert);
 }
 
-.order-card .status.warning {
+.school-card .status.warning {
   background-color: var(--warning);
 }
 
-.order-card .status.success {
+.school-card .status.success {
   background-color: var(--success);
 }

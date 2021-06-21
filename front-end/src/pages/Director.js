@@ -5,7 +5,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Topbar } from '../components';
 // import api from '../services';
 
-import '../styles/Orders.css';
+import '../styles/Schools.css';
 
 export default function Director() {
   const title = 'Diretor';

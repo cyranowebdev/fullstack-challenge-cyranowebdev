@@ -7,7 +7,11 @@ const getAll = async () => {
     .then((db) => db.collection('schools').find().toArray())
     .catch((err) => err);
 
-  return results;
+  const camelResults = results.map((result) => {
+    const { _id: id, ...data } = result;
+    return { id, ...data };
+  });
+  return camelResults;
 };
 
 const getById = async (schoolId) => {

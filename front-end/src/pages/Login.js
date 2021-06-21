@@ -41,7 +41,7 @@ export default function Login() {
     <div className="login-wrapper">
       <section className="logo-wrapper">
         <img src={ logo } alt="Logo" className="login-logo" />
-        <h1>Trybeer</h1>
+        <h1>Escola<i>Web</i></h1>
       </section>
       <form onSubmit={ submit }>
         <fieldset className="login-form">

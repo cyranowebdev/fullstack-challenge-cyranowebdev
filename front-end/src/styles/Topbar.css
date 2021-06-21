@@ -23,7 +23,6 @@
 
 .title {
   --letter-space: 4px;
-  font-family: 'Kontanter Bold', sans-serif;
   font-size: 1.2em;
   letter-spacing: var(--letter-space);
   margin: 0;
