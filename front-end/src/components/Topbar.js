@@ -23,7 +23,7 @@ export default function Topbar(props) {
     history.push('/login');
   };
 
-  const className = (token.role && token.role === 'administrator')
+  const className = (token.profile && token.profile === 'admin')
     ? 'admin-side-bar-container'
     : `side-menu-container ${hidden}`;
 
@@ -40,7 +40,7 @@ export default function Topbar(props) {
   return (
     <section className="topbar">
       <section className="header">
-        { (token.role && token.role === 'client') && (
+        { (token.profile && token.profile !== 'admin') && (
           <button
             type="button"
             onClick={ triggerSidebar }
@@ -53,7 +53,7 @@ export default function Topbar(props) {
         <h1 className="title">Escola<i>Web</i></h1>
         <h3 data-testid="top-title" className="subtitle">{ title }</h3>
       </section>
-      { (token.role && token.role === 'administrator')
+      { (token.profile && token.profile === 'admin')
         ? <AdminMenu { ...menuProps } />
         : <ClientMenu { ...menuProps } /> }
     </section>
@@ -65,5 +65,5 @@ Topbar.propTypes = {
 };
 
 Topbar.defaultProps = {
-  title: 'TryBeer',
+  title: 'EscolaWeb',
 };
