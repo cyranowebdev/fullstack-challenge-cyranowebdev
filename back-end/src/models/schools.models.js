@@ -46,8 +46,11 @@ const getByDirectorId = async (userId) => {
       },
     ]).toArray());
 
-  const { _id: id, ...data } = result[0];
-  return { id, ...data };
+  if (result.length > 0) {
+    const { _id: id, ...data } = result[0];
+    return { id, ...data };
+  }
+  return result;
 };
 
 const create = async (newSchool) => {

@@ -7,6 +7,7 @@ import AppContext from './app.context';
 const AppProvider = ({ children }) => {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('login')));
   const [schools, setSchools] = useState([]);
+  const [directorSchool, setDirectorSchool] = useState({});
   const [classes, setClasses] = useState([]);
   const updateLogin = useStorage('login');
 
@@ -15,6 +16,9 @@ const AppProvider = ({ children }) => {
   const schoolContext = useMemo(() => (
     { schools, setSchools }), [schools, setSchools]);
 
+  const directorContext = useMemo(() => (
+    { directorSchool, setDirectorSchool }), [directorSchool, setDirectorSchool]);
+
   const classesContext = useMemo(() => (
     { classes, setClasses }), [classes, setClasses]);
 
@@ -22,7 +26,12 @@ const AppProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={ { schoolContext, tokenContext, classesContext } }
+      value={ {
+        schoolContext,
+        directorContext,
+        classesContext,
+        tokenContext,
+      } }
     >
       {children}
     </AppContext.Provider>

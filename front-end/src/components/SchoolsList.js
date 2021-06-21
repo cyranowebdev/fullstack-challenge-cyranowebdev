@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useCallback } from 'react';
 
 import AppContext from '../context/app.context';
 import api from '../services';
@@ -8,6 +8,12 @@ export default function SchoolsList() {
   const {
     schoolContext: { schools, setSchools },
     tokenContext: { token } } = useContext(AppContext);
+
+  const removeSchool = useCallback(async (schoolId) => {
+    await api.admin.removeSchool(token, schoolId);
+    const refreshSchools = await api.admin.fetchSchools(token);
+    setSchools(refreshSchools);
+  }, [token, setSchools]);
 
   useEffect(() => {
     const getSchools = async (payload) => {
@@ -28,7 +34,12 @@ export default function SchoolsList() {
       { (schools.length < 1)
         ? <h4>{ noSchools }</h4>
         : schools.map((school, index) => (
-          <SchoolCard school={ school } index={ index } key={ school.id } />)) }
+          <SchoolCard
+            school={ school }
+            remove={ removeSchool }
+            index={ index }
+            key={ school.id }
+          />)) }
     </section>
   );
 }

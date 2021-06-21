@@ -1,18 +1,16 @@
-import React, { useContext, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+// import React, { useContext } from 'react';
+// import { useHistory } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 
-import AppContext from '../context/app.context';
-import api from '../services';
-import { Button } from '.';
+// import AppContext from '../context/app.context';
+import Button from './Button';
 
-export default function SchoolCard({ school, index }) {
-  const {
-    schoolContext: { setSchools },
-    tokenContext: { token } } = useContext(AppContext);
+export default function SchoolCard({ school, remove, index }) {
+  // const { tokenContext: { token } } = useContext(AppContext);
   const { id, name, address, type, director, status } = school;
 
-  const history = useHistory();
+  // const history = useHistory();
 
   const schoolTypes = {
     0: 'Municipal',
@@ -20,19 +18,13 @@ export default function SchoolCard({ school, index }) {
     2: 'Federal',
   };
 
-  const removeSchool = useCallback(async () => {
-    await api.admin.removeSchool(token, id);
-    const refreshSchools = await api.admin.fetchSchools(token);
-    setSchools(refreshSchools);
-  }, [id, token, setSchools]);
-
   let statusCss = 'status success';
   if (!status) statusCss = 'status warning';
 
-  const getSchoolDetails = () => {
-    if (token.profile === 'admin') return history.push(`/admin/orders/${id}`);
-    history.push(`/orders/${id}`);
-  };
+  // const getSchoolDetails = () => {
+  //   if (token.profile === 'admin') return history.push(`/admin/orders/${id}`);
+  //   history.push(`/orders/${id}`);
+  // };
 
   return (
     <section
@@ -53,7 +45,7 @@ export default function SchoolCard({ school, index }) {
       <Button
         label="Deletar"
         className="status alert"
-        callback={ removeSchool }
+        callback={ remove }
       />
     </section>
   );
@@ -62,4 +54,9 @@ export default function SchoolCard({ school, index }) {
 SchoolCard.propTypes = {
   school: PropTypes.objectOf(PropTypes.any).isRequired,
   index: PropTypes.number.isRequired,
+  remove: PropTypes.func,
+};
+
+SchoolCard.defaultProps = {
+  remove: () => {},
 };
