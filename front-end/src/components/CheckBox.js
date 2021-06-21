@@ -5,14 +5,17 @@ const CheckBox = (props) => {
   const { callback } = props;
 
   return (
-    <label htmlFor="quero-vender" className="inputError">
-      <input
-        id="quero-vender"
-        type="checkbox"
-        data-testid="signup-seller"
-        onClick={ (e) => callback(e.target) }
-      />
-      Quero vender
+    <label htmlFor="user-profile" className="inputError">
+      <select
+        name="user-profile"
+        id="user-profile"
+        onChange={ (e) => callback(e.target) }
+      >
+        <option value="">Escolha uma opção</option>
+        <option value="admin">Admin</option>
+        <option value="director">Diretor(a)</option>
+        <option value="teacher">Docente</option>
+      </select>
     </label>
   );
 };

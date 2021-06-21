@@ -85,7 +85,7 @@ button:disabled {
   --letter-space: 18px;
   align-self: center;
   display: inline-block;
-  font-family: 'Kontanter Bold', sans-serif;
+  font-family: serif;
   font-size: 11vw;
   letter-spacing: var(--letter-space);
   margin: 20px 0 0 var(--letter-space);

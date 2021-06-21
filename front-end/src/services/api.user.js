@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const user = async (action, payload) => {
   try {
-    const localhost = process.env.HOSTNAME || 'localhost';
+    const localhost = process.env.REACT_APP_HOSTNAME || 'localhost:3001';
     let endpoint = '';
     switch (action) {
     case 'register':
@@ -17,12 +17,12 @@ const user = async (action, payload) => {
     default: return null;
     }
 
-    const method = (action === 'update') ? 'put' : 'post';
+    const method = 'post';
     const headers = { authorization: payload.token };
 
     const request = {
       method,
-      url: `http://${localhost}:3001/${endpoint}`,
+      url: `http://${localhost}/${endpoint}`,
       data: payload,
       headers,
     };

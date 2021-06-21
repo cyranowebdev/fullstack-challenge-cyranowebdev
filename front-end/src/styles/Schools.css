@@ -1,4 +1,4 @@
-.orders-container {
+.schools-container {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
@@ -7,45 +7,50 @@
   width: 90%;
 }
 
-.order-card {
+.school-card {
   align-items: center;
   background-color: var(--bright-element-bg-color);
   border-radius: 20px;
   box-shadow: 0px 4px 17px 0px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
   display: flex;
   flex-flow: column nowrap;
   height: 200px;
   justify-content: space-around;
   margin: 6px;
-  padding: 4px 8px;
-  width: 120px;
+  padding: 14px 18px;
+  width: 220px;
   -webkit-box-shadow: 0px 4px 17px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 4px 17px 0px rgba(0, 0, 0, 0.25);
 }
 
-.order-card .name {
+.school-card button {
+  cursor: pointer;
+}
+
+.school-card .name {
+  flex-grow: 1;
   font-size: 1.2em;
   font-weight: 500;
   text-align: center;
 }
 
-.order-card .total {
-  background-color: var(--tertiary-att);
+.school-card .address {
+  background-color: var(--element-bg-color);
   border-radius: 8px;
   font-size: 1.1em;
   font-style: italic;
+  margin-bottom: 16px;
   padding: 10px 20px;
 }
 
-.order-card .date {
+.school-card .date {
   color: var(--tertiary-text-color);
   font-size: 1em;
   font-style: italic;
   text-align: center;
 }
 
-.order-card .status {
+.school-card .status {
   background-color: var(--secondary-att);
   border-radius: 12px;
   color: var(--bg-color);
@@ -54,14 +59,14 @@
   padding: 5px 20px 7px;
 }
 
-.order-card .status.alert {
+.school-card .status.alert {
   background-color: var(--alert);
 }
 
-.order-card .status.warning {
+.school-card .status.warning {
   background-color: var(--warning);
 }
 
-.order-card .status.success {
+.school-card .status.success {
   background-color: var(--success);
 }

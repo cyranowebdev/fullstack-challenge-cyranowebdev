@@ -7,7 +7,11 @@ const getAll = async () => {
     .then((db) => db.collection('schools').find().toArray())
     .catch((err) => err);
 
-  return results;
+  const camelResults = results.map((result) => {
+    const { _id: id, ...data } = result;
+    return { id, ...data };
+  });
+  return camelResults;
 };
 
 const getById = async (schoolId) => {
@@ -42,8 +46,11 @@ const getByDirectorId = async (userId) => {
       },
     ]).toArray());
 
-  const { _id: id, ...data } = result[0];
-  return { id, ...data };
+  if (result.length > 0) {
+    const { _id: id, ...data } = result[0];
+    return { id, ...data };
+  }
+  return {};
 };
 
 const create = async (newSchool) => {

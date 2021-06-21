@@ -3,42 +3,36 @@ import PropTypes from 'prop-types';
 
 import useStorage from '../hooks/useStorage';
 import AppContext from './app.context';
-import api from '../services';
 
 const AppProvider = ({ children }) => {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('login')));
-  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || {});
-  const [products, setProducts] = useState([]);
+  const [schools, setSchools] = useState([]);
+  const [directorSchool, setDirectorSchool] = useState();
+  const [classes, setClasses] = useState([]);
   const updateLogin = useStorage('login');
-  const updateCart = useStorage('cart');
 
   const tokenContext = useMemo(() => ({ token, setToken }), [token, setToken]);
 
-  const productsContext = useMemo(() => (
-    { products, setProducts }
-  ), [products, setProducts]);
+  const schoolContext = useMemo(() => (
+    { schools, setSchools }), [schools, setSchools]);
 
-  const cartContext = useMemo(() => ({ cart, setCart }), [cart, setCart]);
+  const directorContext = useMemo(() => (
+    { directorSchool, setDirectorSchool }), [directorSchool, setDirectorSchool]);
 
-  useEffect(() => {
-    updateLogin(token);
-  }, [token, updateLogin]);
+  const classesContext = useMemo(() => (
+    { classes, setClasses }), [classes, setClasses]);
 
-  useEffect(() => {
-    updateCart(cart);
-  }, [cart, updateCart]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const productsArray = await api.getProducts(token).catch((error) => error);
-      setProducts(productsArray);
-    };
-    if (token && Object.keys(token).length > 0
-      && products && products.length < 1) fetchProducts();
-  }, [setProducts, products, token]);
+  useEffect(() => updateLogin(token), [token, updateLogin]);
 
   return (
-    <AppContext.Provider value={ { productsContext, tokenContext, cartContext } }>
+    <AppContext.Provider
+      value={ {
+        schoolContext,
+        directorContext,
+        classesContext,
+        tokenContext,
+      } }
+    >
       {children}
     </AppContext.Provider>
   );

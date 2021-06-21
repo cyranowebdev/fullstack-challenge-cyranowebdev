@@ -1,4 +1,4 @@
-const { admin, users, schools } = require('../models');
+const { users, schools } = require('../models');
 const { authNewSchool, authInstanceId } = require('../schemas');
 
 const error = {
@@ -18,8 +18,7 @@ const getAllSchools = async () => schools.getAll();
 
 const getDirectorId = async (school) => {
   if (school.director) {
-    authInstanceId(school.director);
-    return users.getUserId(school.director);
+    return users.getUserIdByEmail(school.director);
   }
   return null;
 };
@@ -45,7 +44,7 @@ const updateSchool = async (school, schoolId) => {
 
 const removeSchool = async (schoolId) => {
   authInstanceId(schoolId);
-  return admin.removeSchool(schoolId);
+  return schools.remove(schoolId);
 };
 
 module.exports = {

@@ -7,8 +7,7 @@ import {
 } from 'react-router-dom';
 
 import {
-  Login, Register, Profile, Products, Checkout, OrderDetails, Chat, Orders,
-  AdminProfile, AdminOrders, AdminOrderDetails, AdminAllChats, AdminChat,
+  Login, Register, Director, Admin, Teacher,
   NotFound, Error } from './pages';
 import { ProtectedRoute } from './components';
 
@@ -18,17 +17,9 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <ProtectedRoute path="/profile" component={ Profile } />
-        <ProtectedRoute path="/products" component={ Products } />
-        <ProtectedRoute path="/checkout" component={ Checkout } />
-        <ProtectedRoute path="/orders/:id" component={ OrderDetails } />
-        <ProtectedRoute path="/orders" component={ Orders } />
-        <ProtectedRoute path="/chat" component={ Chat } />
-        <ProtectedRoute path="/admin/profile" component={ AdminProfile } />
-        <ProtectedRoute path="/admin/orders/:id" component={ AdminOrderDetails } />
-        <ProtectedRoute path="/admin/orders" component={ AdminOrders } />
-        <ProtectedRoute path="/admin/chats/:roomId" component={ AdminChat } />
-        <ProtectedRoute path="/admin/chats" component={ AdminAllChats } />
+        <ProtectedRoute path="/admin" component={ Admin } />
+        <ProtectedRoute path="/director" component={ Director } />
+        <ProtectedRoute path="/teacher" component={ Teacher } />
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
         <Route exact path="/">

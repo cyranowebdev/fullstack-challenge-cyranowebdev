@@ -21,14 +21,20 @@ const getById = async (userId) => {
   return user;
 };
 
-const getByProfile = async (profile) => {
+const getByProfile = async (value) => {
   const results = await connection()
-    .then((db) => db.collection('users').find({ profile }).toArray());
-
+    .then((db) => db.collection('users').find({ profile: value }).toArray());
+  if (results) {
+    const camelResults = results.map((result) => {
+      const { _id: id, name, email, profile } = result;
+      return { id, name, email, profile };
+    });
+    return camelResults;
+  }
   return results;
 };
 
-const getUserId = async (email) => {
+const getUserIdByEmail = async (email) => {
   const result = await connection()
     .then((db) => db.collection('users').findOne({ email }));
   if (result) return result._id;
@@ -92,7 +98,7 @@ module.exports = {
   getAll,
   getById,
   getByProfile,
-  getUserId,
+  getUserIdByEmail,
   searchByProfile,
   create,
   findUserByEmail,

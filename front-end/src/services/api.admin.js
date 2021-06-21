@@ -1,18 +1,21 @@
 import axios from 'axios';
 
-const getUserById = async (payload) => {
+const localhost = process.env.REACT_APP_HOSTNAME || 'localhost:3001';
+
+const getDirectors = async (payload) => {
   try {
     const headers = { authorization: payload.token };
-    const localhost = process.env.HOSTNAME || 'localhost';
 
     const request = {
       method: 'get',
-      url: `http://${localhost}:3001/admin/user/${payload.userId}`,
+      url: `http://${localhost}/admin/users/director`,
       headers,
     };
 
     const result = await axios(request);
-    console.log('Admin getUserById: ', result);
+    console.log('Admin getDirectors: ', result);
+    result.data.unshift({
+      name: 'Escolha um diretor disponível', email: '', id: '1' });
     return result.data;
   } catch (error) {
     if (error.response) {
@@ -33,21 +36,18 @@ const getUserById = async (payload) => {
   }
 };
 
-const updateSale = async (payload) => {
+const fetchSchools = async (payload) => {
   try {
-    const localhost = process.env.HOSTNAME || 'localhost';
     const headers = { authorization: payload.token };
-    const status = payload.status.toString();
 
     const request = {
-      method: 'put',
-      url: `http://${localhost}:3001/admin/sales/${payload.saleId}`,
+      method: 'get',
+      url: `http://${localhost}/admin/schools`,
       headers,
-      data: { delivered: status },
     };
 
     const result = await axios(request);
-    console.log('Admin upd sale: ', result);
+    console.log('Admin get schools: ', result);
     return result.data;
   } catch (error) {
     if (error.response) {
@@ -68,19 +68,20 @@ const updateSale = async (payload) => {
   }
 };
 
-const getSales = async (payload) => {
+const saveSchool = async (token, payload) => {
   try {
-    const localhost = process.env.HOSTNAME || 'localhost';
-    const headers = { authorization: payload.token };
+    const headers = { authorization: token.token };
+    const data = payload;
 
     const request = {
-      method: 'get',
-      url: `http://${localhost}:3001/admin/sales/`,
+      method: 'post',
+      url: `http://${localhost}/admin/schools/create`,
       headers,
+      data,
     };
 
     const result = await axios(request);
-    console.log('Admin get sales: ', result);
+    console.log('Admin save school: ', data);
     return result.data;
   } catch (error) {
     if (error.response) {
@@ -101,19 +102,20 @@ const getSales = async (payload) => {
   }
 };
 
-const getSaleById = async (payload) => {
+const removeSchool = async (token, payload) => {
   try {
-    const headers = { authorization: payload.token };
-    const localhost = process.env.HOSTNAME || 'localhost';
+    const headers = { authorization: token.token };
+    const data = { schoolId: payload };
 
     const request = {
-      method: 'get',
-      url: `http://${localhost}:3001/admin/sales/${payload.saleId}`,
+      method: 'delete',
+      url: `http://${localhost}/admin/school`,
       headers,
+      data,
     };
 
     const result = await axios(request);
-    console.log('Admin getSaleById: ', result);
+    console.log('Admin remove school: ', data);
     return result.data;
   } catch (error) {
     if (error.response) {
@@ -135,8 +137,8 @@ const getSaleById = async (payload) => {
 };
 
 export default {
-  getSales,
-  getSaleById,
-  updateSale,
-  getUserById,
+  getDirectors,
+  fetchSchools,
+  saveSchool,
+  removeSchool,
 };
