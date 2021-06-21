@@ -15,7 +15,7 @@ export default function Director() {
       const result = await api.director.fetchSchool(payload);
       setDirectorSchool(result);
     };
-    if (Object.keys(directorSchool).length < 1) {
+    if (!directorSchool) {
       getSchool(token);
     }
   }, [setDirectorSchool, directorSchool, token]);
