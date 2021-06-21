@@ -1,83 +1,55 @@
-# Plataforma A+ - Desafio FullStack
+#### <a name="top"></a> Esse repo é um fork do desafio técnico para seleção de pessoa desenvolvedora fullstack na Plataforma A+.
+##### Veja a [Plataforma A+ no LinkedIn](https://www.linkedin.com/company/plataformaamais)  
+  
+# Fullstack Challenge  ![!project status](https://img.shields.io/badge/status-development-f4a201?logo=visual-studio-code)
+![!react](https://img.shields.io/badge/react-purple?logo=react)
+![!react-router](https://img.shields.io/badge/react%2frouter-purple?logo=react-router)
+![!mongo](https://img.shields.io/badge/mongoDB-black?logo=mongodb)
+![!jwt](https://img.shields.io/badge/jwtokens-black?logo=json-web-tokens)
+![!swagger](https://img.shields.io/badge/swagger-black?logo=swagger)
+![!express](https://img.shields.io/badge/express-black?logo=express)    
 
-Estamos à procura de full-stack Developers para fazerem parte do nosso time e contribuírem com a transformação digital das escolas.
+- [Funcionalidades](#requisites)
+- [Instructions](#instructions)
 
-## Quem somos
 
-A Plataforma A+ é uma EdTech que une um grupo de engenheiros de softwares, designers, analistas e professores apaixonados em gerar inovação para transformar e potencializar a capacidade de aprendizagem do ser humano.
 
-Siga-nos no [Linkedin](https://www.linkedin.com/company/plataformaamais).
+## Funcionalidades <a name="requisites"></a>
 
-Acompanhe nossas vagas no [Linkedin](https://www.linkedin.com/company/plataformaamais/jobs/).
+O desafio foi desenvolver uma aplicação WEB ou APP, para controlar Alunos e Professores em suas Turmas, referentes às séries do Ensino Fundamental, em uma Escola Pública.
+Baseado na descrição dos requisitos, decidi pelos seguintes perfis de usuário:
+- Admin: cria, edita e apaga escolas, além de vincular usuários diretores a UMA escola cadastrada
+- Diretores: criam, editam e apagam turmas na escola, podendo vincular pessoas usuárias professoras a cada turma
+- Docentes:
+  - podem ser vinculados a um número ilimitado de turmas em diversas escolas
+  - podem adicionar e remover estudantes nessas turmas
+  - podem adicionar e ver comentários nas turmas às quais estão vinculados
+  - podem adicionar e ver comentários a cada estudante em suas turmas
+  
+  
 
----
+- *Back-end:* Optei pela arquitetura MSC e usei [**MongoDB**](https://docs.mongodb.com/) para persistência de dados.  
+Usei Node.js e [**Express**](https://expressjs.com/), [**JWT**](https://jwt.io/) para login e sessão, além de aproveitar um middleware simplificado de log e *error handling* feito por um colega de turma e usado em um de nossos projetos em grupo, nos permitindo melhorar o código.  
+**Documentação a ser feita** usando o [**Swagger**](https://swagger.io) (ficará disponível em `localhost:3001/documentation`).
 
-## Desafio
+- *Front-end:* Usei [**React**](https://reactjs.org/) com *React Context API* e [*React Router*](https://reactrouter.com/).  
+No design utilizei CSS puro e uma paleta de cores sugerida pelo [*NordTheme*](https://www.nordtheme.com/).
 
-Desenvolver uma aplicação WEB ou APP, para controlar Alunos e Professores em suas Turmas, referentes às séries do Ensino Fundamental, em uma Escola Pública.
+##### [back to top](#top)
 
-- A aplicação deve apresentar uma lista de Escolas Públicas:
-  - Deve permitir adicionar, modificar e excluir Escolas.
-  - Cada Escola deve possuir um Diretor responsável.
-- As Turmas devem ser disponibilizadas ao acessar detalhes de uma Escola:
-  - Deve permitir adicionar, modificar e excluir Turmas.
-  - Cada Turma possui um Professor associado a ela.
-    - Um Professor poderá estar associado a mais de uma Turma.
-      - Deve permitir que o Diretor possa adicionar e excluir Professores em uma Turma.
-  - Ao entrar nos detalhes da Turma, os alunos e professores relacionados devem ser exibidos.
-    - Alunos devem ser adicionados ou excluídos das Turmas.
-- Os Alunos possuem informações mínimas que devem estar contidas em seus cadastros, como:
-  - Nome do Aluno
-  - Nomes dos Responsáveis
-  - Contatos
-- Os Professores devem ser capazes de adicionar observações sobre a Turma e sobre determinado Aluno.
-- A solução deve possibilitar buscar com base em alguma informação, de escolha livre, contida nas entidades.
+## Instruções <a name="instructions"></a>
 
-### Recomendações
+**Clone** o repo ou faça o **download** do zip (e depois extraindo em alguma pasta local, naturalmente).
 
-- Módulos de frontend e backend devem ser desenvolvidos de forma separada.
-- O backend pode ser feito utilizando uma das seguintes linguagens: Javascript, Typescript, Python ou C#, nesta ordem de preferência.
-- O frontend poderá ser desenvolvido com JavaScript, Typescript, Dart `(No caso de um app Flutter como frontend)` ou qualquer framework/ferramenta que suporte ou utilize essas tecnologias.
-- Para camada de persistência, utilize NoSQL como o MongoDB ou um SGBD relacional como o PostgreSQL. A modelagem de documentos ou entidades é livre e de acordo com o escolhido e utilizado pela sua solução.
-- O que for submetido, mesmo que incompleto, deve funcionar.
+Acessar a pasta do projeto via terminal e rodar `npm install`. (você precisará do *Node.js* instalado em sua máquina).
 
-### Instruções
+Para iniciar a API **back-end**: entre na pasta *back-end* e execute `npm start`.   
+> (**bonus a fazer**: a documentação da API está em `localhost:3001/documentation`)
 
-1. Faça o **`Fork`** deste repositório;
-2. Nomeie o projeto da seguinte maneira: **fullstack-challenge-`nome-sobrenome`**;
-3. Ao concluir o desafio, publique em seu próprio repositório, **com acesso `público` habilitado** e envie o link para os e-mails <alex.souza@plataformaamais.com.br> e/ou <bruno.souza@plataformaamais.com.br>.
+Para iniciar o **front-end**: acesse a pasta *front-end* e execute `npm start`.  
 
-### Considerações gerais
+Para rodar **back-end tests (a implementar)** (com relatório de cobertura): acesse a pasta *back-end* e execute `npm run test-coverage`.  
 
-- Utilize as melhores práticas que você conhece.
-- Utilize ferramentas visuais como desenhos, fluxos e diagramas para explicar sua solução, sem muita formalidade, apenas para passar uma idéia geral e/ou explicar pontos interessantes.
-- As opções de tecnologias são baseadas no que utilizamos para desenvolver soluções hoje. Porém, na Plataforma A+, o foco no resultado é muito valorizado, por isso não se sinta limitado e caso tenha implementações fora dos opcionais oferecidos de tecnologias e ferramentas, foque em responder o desafio com o que conhece.
-- Caso não termine o desafio, utilizaremos o que entregou como base para a conversa.
-- Lembre-se que iremos analisar seu desafio e terá a chance de explicar sua estratégia para pessoas de tecnologia.
-- Teremos uma conversa agradável e objetiva, onde falaremos sobre tech, com base neste desafio.
+#### Importante: mongoDB precisa estar instalado e com o serviço ativo em sua máquina para o back-end funcionar.
 
-### Critérios de avaliação
-
-- Organização.
-- Manutenibilidade.
-- Legibilidade, limpeza, clareza do código​.
-- Resultado funcional.
-- Flexibilidade da aplicação:​ Parametrização, agnóstico ao ambiente, escalabilidade, etc.
-- Segurança​.
-- Documentação objetiva.
-- Cobertura de código.
-- Escolhas técnicas e suas justificativas.
-- Histórico de commits​.
-
-### Diferenciais
-
-- Utilizar layout responsivo.
-- Boas práticas de UX na solução.
-- Backend dockerizado.
-- Documentação.
-- Testes unitários e de integração.
-- Uso de TDD.
-- Uso de patterns.
-- Abordagem para desenvolvimento de software.
-
-**Boa sorte!**
+##### [back to top](#top)
