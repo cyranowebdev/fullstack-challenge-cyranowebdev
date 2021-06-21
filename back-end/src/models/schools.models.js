@@ -50,7 +50,7 @@ const getByDirectorId = async (userId) => {
     const { _id: id, ...data } = result[0];
     return { id, ...data };
   }
-  return result;
+  return {};
 };
 
 const create = async (newSchool) => {
