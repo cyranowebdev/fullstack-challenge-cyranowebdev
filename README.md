@@ -41,7 +41,9 @@ No design utilizei CSS puro e uma paleta de cores sugerida pelo [*NordTheme*](ht
 
 **Clone** o repo ou faça o **download** do zip (e depois extraindo em alguma pasta local, naturalmente).
 
-Acessar a pasta do projeto via terminal e rodar `npm install`. (você precisará do *Node.js* instalado em sua máquina).
+Acessar a pasta do projeto via terminal e instalar cada módulo: (você precisará do *Node.js* instalado em sua máquina)   
+- acessar a pasta *back-end* dentro do projeto e rodar `npm install`
+- acessar a pasta *front-end* dentro do projeto e rodar `npm install`
 
 Para iniciar a API **back-end**: entre na pasta *back-end* e execute `npm start`.   
 > (**bonus a fazer**: a documentação da API está em `localhost:3001/documentation`)
