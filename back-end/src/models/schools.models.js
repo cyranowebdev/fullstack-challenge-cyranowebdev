@@ -88,6 +88,10 @@ const remove = async (schoolId) => {
     .then((db) => db.collection('schools').deleteOne(
       { _id: ObjectId(schoolId) },
     ));
+    await connection()
+    .then((db) => db.collection('classes').deleteMany(
+      { schoolId },
+    ));
 
   return result;
 };

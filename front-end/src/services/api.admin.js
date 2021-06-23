@@ -77,7 +77,7 @@ const saveSchool = async (token, payload) => {
       method: 'post',
       url: `http://${localhost}/admin/schools/create`,
       headers,
-      data,
+      data: payload,
     };
 
     const result = await axios(request);

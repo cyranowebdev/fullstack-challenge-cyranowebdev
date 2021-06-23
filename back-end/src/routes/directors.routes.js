@@ -10,10 +10,10 @@ directors.get('/',
 directors.get('/teacher',
   middlewares.authToken, middlewares.authDirector, controllers.searchTeacher);
 
-directors.get('/classes',
+directors.post('/classes',
   middlewares.authToken, middlewares.authDirector, controllers.getClasses);
 
-directors.get('/class',
+directors.post('/class/get',
   middlewares.authToken, middlewares.authDirector, controllers.getClass);
 directors.post('/class',
     middlewares.authToken, middlewares.authDirector, controllers.createClass);

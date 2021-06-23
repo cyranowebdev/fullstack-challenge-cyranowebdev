@@ -1,12 +1,52 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable max-lines-per-function */
 const ObjectId = require('mongodb').ObjectID;
 const connection = require('./connection');
 
 const getBySchoolId = async (schoolId) => {
-  const result = await connection()
-    .then((db) => db.collection('classes').find({ schoolId }).toArray());
+  const results = await connection()
+    .then((db) => db.collection('classes').aggregate([
+      { $match: { schoolId } },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'teachers',
+          foreignField: '_id',
+          as: 'teachers',
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          year: 1,
+          grade: 1,
+          class: 1,
+          schoolId: 1,
+          teachers: 1,
+        },
+      },
+    ]).toArray());
+    if (results) {
+      const clearClasses = results.map((element) => {
+        const thisClass = { ...element };
+        const { _id: id } = thisClass;
+        delete thisClass._id;
+        const clearTeachers = thisClass.teachers.map((teacher) => {
+          if (teacher) {
+            return ({
+              name: teacher.name,
+              email: teacher.email,
+            });
+          }
+          return null;
+        });
+        return { id, ...thisClass, teachers: clearTeachers };
+      });
 
-  return result;
+      return clearClasses;
+    }
+  return results;
 };
 
 const getById = async (classId) => {
@@ -17,16 +57,15 @@ const getById = async (classId) => {
 };
 
 const create = async (newClass) => {
+  const teachers = newClass.teachers.map((teacher) => {
+    if (teacher) return ObjectId(teacher);
+    return null;
+  });
+  const createClass = { ...newClass, teachers };
   const result = await connection()
-    .then((db) => db.collection('classes').insertOne(newClass));
+    .then((db) => db.collection('classes').insertOne(createClass));
   if (result) {
-      const classCreated = {
-        schoolId: result.ops[0].schoolId,
-        year: result.ops[0].year,
-        grade: result.ops[0].grade,
-        class: result.ops[0].class,
-        teachers: result.ops[0].teachers,
-      };
+      const classCreated = { ...result.ops[0] };
       return classCreated;
     }
   return result;
@@ -34,10 +73,17 @@ const create = async (newClass) => {
 
 const update = async (classId, field, value) => {
   const updateField = {};
-  updateField[field] = value;
-  const set = {
-    $set: updateField,
-  };
+  const set = {};
+  if (field !== 'teachers') {
+    updateField[field] = value;
+  }
+  if (field === 'teachers') {
+    updateField.teachers = value.map((teacher) => {
+      if (teacher) return ObjectId(teacher);
+      return null;
+    });
+  }
+  set.$set = updateField;
   const { matchedCount, result: { nModified } } = await connection()
     .then((db) => db.collection('classes').updateOne(
       { _id: ObjectId(classId) },
@@ -49,7 +95,9 @@ const update = async (classId, field, value) => {
 
 const remove = async (classId) => {
   const result = await connection()
-    .then((db) => db.collection('classes').deleteOne({ _id: ObjectId(classId) }));
+    .then((db) => db.collection('classes').deleteOne(
+      { _id: ObjectId(classId) },
+    ));
 
   return result.deletedCount > 0;
 };

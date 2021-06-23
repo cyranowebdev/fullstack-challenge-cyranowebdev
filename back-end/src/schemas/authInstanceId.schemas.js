@@ -15,10 +15,10 @@ const idValidator = (instanceId) => {
 };
 
 const authInstanceId = (instanceId) => {
-  if (typeof instanceId === 'string') return idValidator(instanceId);
   if (Array.isArray(instanceId) && instanceId.length > 0) {
     return instanceId.forEach((id) => idValidator(id));
   }
+  return idValidator(instanceId);
 };
 
 module.exports = authInstanceId;
