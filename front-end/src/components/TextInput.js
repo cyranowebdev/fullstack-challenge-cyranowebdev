@@ -8,6 +8,10 @@ const TextInput = (props) => {
   let label;
 
   switch (name) {
+  case 'comment':
+    type = 'text';
+    label = 'Comentário';
+    break;
   case 'name':
     type = 'text';
     label = 'Nome';

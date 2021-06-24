@@ -5,7 +5,8 @@ import AppContext from '../context/app.context';
 import { Button } from '.';
 
 export default function ClassCard({ element }) {
-  const { commentsContext: { setComments } } = useContext(AppContext);
+  const { commentsContext: { setComments },
+    targetCommentContext: { setTargetComment } } = useContext(AppContext);
   const { id, grade, year, class: name, teachers } = element;
   const currComments = (element.comments) ? element.comments : [];
   const students = (element.students) ? element.students : [];
@@ -47,7 +48,7 @@ export default function ClassCard({ element }) {
         <Button
           label="Adicionar"
           className="status success"
-          callback={ () => {} }
+          callback={ () => setTargetComment(id) }
         />
         <br />
         Estudantes:

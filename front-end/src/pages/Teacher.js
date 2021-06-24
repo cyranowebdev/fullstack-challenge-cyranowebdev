@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import AppContext from '../context/app.context';
-import { Topbar, TeacherClasses, Comments } from '../components';
+import { Topbar, TeacherClasses, Comments, AddComment } from '../components';
 import api from '../services';
 
 import '../styles/Schools.css';
@@ -68,6 +68,7 @@ export default function Teacher() {
       {`Bem vinda(o), ${token.name}!`}
       <TeacherClasses classes={ classes } />
       <Comments teachers={ relatedTeachers } />
+      <AddComment />
     </section>
   );
 }
