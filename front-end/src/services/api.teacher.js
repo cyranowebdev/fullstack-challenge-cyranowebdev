@@ -20,7 +20,6 @@ const saveComment = async (token, payload) => {
       headers,
       data,
     };
-    console.log(request)
     const result = await axios(request);
     return result.data;
   } catch (error) {
