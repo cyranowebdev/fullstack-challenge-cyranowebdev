@@ -156,14 +156,19 @@ const getByTeacher = async (teacherId) => {
 
   const cleanResults = [];
   results.forEach((result) => {
+    const { _id: id, ...data } = result;
+    const { _id: schoolId, ...schoolData } = result.school[0];
+    const clearSchool = { id: schoolId, ...schoolData };
     const resultTeachers = result.teachers.map((teacher) => ({
       id: teacher._id,
       name: teacher.name,
       email: teacher.email,
     }));
     cleanResults.push({
-      ...result,
+      id,
+      ...data,
       teachers: resultTeachers,
+      school: clearSchool,
     });
   });
 
