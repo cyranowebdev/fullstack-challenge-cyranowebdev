@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 // import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
-import { Topbar } from '../components';
+import { Topbar, TeacherClasses } from '../components';
 import api from '../services';
 
 import '../styles/Schools.css';
@@ -28,6 +28,7 @@ export default function Teacher() {
     <section>
       <Topbar title={ title } />
       {`Bem vinda(o), ${token.name}!`}
+      <TeacherClasses classes={ classes } />
     </section>
   );
 }

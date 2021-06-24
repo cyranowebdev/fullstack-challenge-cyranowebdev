@@ -135,6 +135,14 @@ const getByTeacher = async (teacherId) => {
       {
         $lookup: {
           from: 'users',
+          localField: 'school.director',
+          foreignField: '_id',
+          as: 'director',
+        },
+      },
+      {
+        $lookup: {
+          from: 'users',
           localField: 'teachers',
           foreignField: '_id',
           as: 'teachers',
@@ -144,6 +152,7 @@ const getByTeacher = async (teacherId) => {
         $project: {
           _id: 1,
           school: 1,
+          director: 1,
           year: 1,
           class: 1,
           grade: 1,
@@ -159,6 +168,7 @@ const getByTeacher = async (teacherId) => {
     const { _id: id, ...data } = result;
     const { _id: schoolId, ...schoolData } = result.school[0];
     const clearSchool = { id: schoolId, ...schoolData };
+    const { name, email } = result.director[0];
     const resultTeachers = result.teachers.map((teacher) => ({
       id: teacher._id,
       name: teacher.name,
@@ -169,6 +179,7 @@ const getByTeacher = async (teacherId) => {
       ...data,
       teachers: resultTeachers,
       school: clearSchool,
+      director: { name, email },
     });
   });
 
