@@ -4,6 +4,7 @@ export { default as SchoolsList } from './SchoolsList';
 export { default as AddSchool } from './AddSchool';
 export { default as DirectorSchool } from './DirectorSchool';
 export { default as SchoolClasses } from './SchoolClasses';
+export { default as ClassCard } from './ClassCard';
 export { default as TextInput } from './TextInput';
 export { default as CheckBox } from './CheckBox';
 export { default as SubmitButton } from './SubmitButton';
