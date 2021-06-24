@@ -17,7 +17,7 @@ export default function ClassCard({ element }) {
         { `Turma: ${name}` }
       </div>
       <div>
-        Professores:
+        Docentes:
         <br />
         { (teachers.length < 1)
           ? (

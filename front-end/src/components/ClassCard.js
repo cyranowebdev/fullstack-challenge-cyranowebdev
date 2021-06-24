@@ -19,7 +19,7 @@ export default function ClassCard({ element, remove }) {
         { `Turma: ${name}` }
       </div>
       <div>
-        Professores:
+        Docentes:
         <br />
         { (teachers.length < 1)
           ? (
