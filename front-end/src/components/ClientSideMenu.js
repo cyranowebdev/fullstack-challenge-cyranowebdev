@@ -5,7 +5,14 @@ import { PropTypes } from 'prop-types';
 export default function ClientMenu({ className, callback }) {
   return (
     <section className={ className }>
-      Client menu
+      <button
+        type="button"
+        onClick={ callback }
+        data-testid="side-menu-item-logout"
+        className="sidebar-logout-btn"
+      >
+        Sair do sistema
+      </button>
     </section>
   );
 }
