@@ -9,6 +9,7 @@ export { default as TeacherSchoolCard } from './TeacherSchoolCard';
 export { default as TeacherClassCard } from './TeacherClassCard';
 export { default as ClassCard } from './ClassCard';
 export { default as ViewStudents } from './ViewStudents';
+export { default as AddStudent } from './AddStudent';
 export { default as Comments } from './Comments';
 export { default as AddComment } from './AddComment';
 export { default as TextInput } from './TextInput';

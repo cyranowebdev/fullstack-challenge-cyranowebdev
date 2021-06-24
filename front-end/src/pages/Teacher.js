@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import AppContext from '../context/app.context';
 import { Topbar, TeacherClasses,
-  Comments, AddComment, ViewStudents } from '../components';
+  Comments, AddComment, ViewStudents, AddStudent } from '../components';
 import api from '../services';
 
 import '../styles/Schools.css';
@@ -71,6 +71,7 @@ export default function Teacher() {
       <Comments teachers={ relatedTeachers } />
       <AddComment />
       <ViewStudents teachers={ relatedTeachers } />
+      <AddStudent />
     </section>
   );
 }
