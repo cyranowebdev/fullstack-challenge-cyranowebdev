@@ -1,16 +1,10 @@
 import React from 'react';
-// import React, { useContext } from 'react';
-// import { useHistory } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 
-// import AppContext from '../context/app.context';
 import Button from './Button';
 
 export default function SchoolCard({ school, remove, index }) {
-  // const { tokenContext: { token } } = useContext(AppContext);
   const { id, name, address, type, director, status } = school;
-
-  // const history = useHistory();
 
   const schoolTypes = {
     0: 'Municipal',
@@ -43,7 +37,7 @@ export default function SchoolCard({ school, remove, index }) {
         {(status) ? 'Ativa' : 'Sem diretor'}
       </span>
       <Button
-        label="Deletar"
+        label="Remover escola"
         className="status alert"
         callback={ remove }
       />

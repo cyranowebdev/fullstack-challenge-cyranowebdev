@@ -8,7 +8,7 @@ const AppProvider = ({ children }) => {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('login')));
   const [schools, setSchools] = useState([]);
   const [directorSchool, setDirectorSchool] = useState();
-  const [classes, setClasses] = useState([]);
+  const [classes, setClasses] = useState();
   const updateLogin = useStorage('login');
 
   const tokenContext = useMemo(() => ({ token, setToken }), [token, setToken]);

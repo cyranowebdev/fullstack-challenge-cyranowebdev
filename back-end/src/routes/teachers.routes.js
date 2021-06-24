@@ -7,6 +7,9 @@ const teachers = express.Router();
 teachers.get('/',
   middlewares.authToken, middlewares.authTeacher, controllers.getClasses);
 
+teachers.get('/school',
+  middlewares.authToken, middlewares.authTeacher, controllers.getSchool);
+
 teachers.post('/class',
   middlewares.authToken, middlewares.authTeacher, controllers.updateClass);
 

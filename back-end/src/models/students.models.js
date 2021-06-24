@@ -3,19 +3,21 @@ const ObjectId = require('mongodb').ObjectID;
 const connection = require('./connection');
 
 const getByClassId = async (classId) => {
+  const classObjId = ObjectId(classId);
   const result = await connection()
     .then((db) => db.collection('classes').findOne(
-      { _id: ObjectId(classId) },
+      { _id: classObjId },
     ));
   if (!result) return null;
   return (result.students) ? result.students : [];
 };
 
 const create = async (payload) => {
+  const classObjId = ObjectId(payload.classId);
   const newStudent = { name: payload.name, comments: [] };
   const { matchedCount, result: { nModified } } = await connection()
     .then((db) => db.collection('classes').updateOne(
-      { _id: ObjectId(payload.classId) },
+      { _id: classObjId },
       { $push: { students: newStudent } },
     ));
   if (matchedCount === 0) return null;
@@ -23,10 +25,11 @@ const create = async (payload) => {
 };
 
 const addComment = async (payload, userId) => {
+  const classObjId = ObjectId(payload.classId);
   const newComment = { msg: payload.msg, teacher: userId };
   const { matchedCount, result: { nModified } } = await connection()
     .then((db) => db.collection('classes').updateOne(
-      { _id: ObjectId(payload.classId) },
+      { _id: classObjId },
       { $push: { 'students.$[element].comments': newComment } },
       { arrayFilters: [{ 'element.name': payload.name }] },
     ));
@@ -35,9 +38,10 @@ const addComment = async (payload, userId) => {
 };
 
 const remove = async (classId, name) => {
+  const classObjId = ObjectId(classId);
   const { matchedCount, result: { nModified } } = await connection()
     .then((db) => db.collection('classes').updateOne(
-      { _id: ObjectId(classId) },
+      { _id: classObjId },
       { $pull:
         { students: { name } },
       },

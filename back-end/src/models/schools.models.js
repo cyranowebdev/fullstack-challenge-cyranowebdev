@@ -15,16 +15,18 @@ const getAll = async () => {
 };
 
 const getById = async (schoolId) => {
+  const schoolObjId = ObjectId(schoolId);
   const result = await connection()
-    .then((db) => db.collection('schools').findOne({ _id: ObjectId(schoolId) }));
+    .then((db) => db.collection('schools').findOne({ _id: schoolObjId }));
 
   return result;
 };
 
 const getByDirectorId = async (userId) => {
+  const userObjId = ObjectId(userId);
   const result = await connection()
     .then((db) => db.collection('schools').aggregate([
-      { $match: { director: ObjectId(userId) } },
+      { $match: { director: userObjId } },
       {
         $lookup: {
           from: 'classes',
@@ -55,9 +57,13 @@ const getByDirectorId = async (userId) => {
 
 const create = async (newSchool) => {
   const status = Boolean(newSchool.director);
+  const schoolObj = { ...newSchool };
+  if (status) {
+    schoolObj.director = ObjectId(newSchool.director);
+  }
   const result = await connection()
     .then((db) => db.collection('schools').insertOne(
-      { ...newSchool, status },
+      { ...schoolObj, status },
     ));
 
   if (result) {
@@ -73,20 +79,30 @@ const create = async (newSchool) => {
 };
 
 const update = async (school, schoolId) => {
-  const status = !!(school.director);
+  const schoolObjId = ObjectId(schoolId);
+  const status = Boolean(school.director);
+  const schoolObj = { ...school };
+  if (status) {
+    schoolObj.director = ObjectId(school.director);
+  }
   const { matchedCount, result: { nModified } } = await connection()
     .then((db) => db.collection('schools').updateOne(
-      { _id: ObjectId(schoolId) },
-      { $set: { ...school, status } },
+      { _id: schoolObjId },
+      { $set: { ...schoolObj, status } },
     ));
   if (matchedCount === 0) return null;
   return (nModified > 0) ? school : 0;
 };
 
 const remove = async (schoolId) => {
+  const schoolObjId = ObjectId(schoolId);
   const result = await connection()
     .then((db) => db.collection('schools').deleteOne(
-      { _id: ObjectId(schoolId) },
+      { _id: schoolObjId },
+    ));
+    await connection()
+    .then((db) => db.collection('classes').deleteMany(
+      { schoolId },
     ));
 
   return result;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 
 export default function AdminMenu({ className, callback }) {
@@ -11,6 +11,10 @@ export default function AdminMenu({ className, callback }) {
 }
 
 AdminMenu.propTypes = {
-  callback: PropTypes.func.isRequired,
+  callback: PropTypes.func,
   className: PropTypes.string.isRequired,
+};
+
+AdminMenu.defaultProps = {
+  callback: () => {},
 };
