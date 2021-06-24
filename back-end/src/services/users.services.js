@@ -1,6 +1,6 @@
 const { users } = require('../models');
 const { generateToken } = require('../security');
-const { authRegisterUser } = require('../schemas');
+const { authRegisterUser, authInstanceId } = require('../schemas');
 
 const create = async (payload) => {
   const data = {
@@ -23,7 +23,13 @@ const create = async (payload) => {
 
 const getByProfile = async (profile) => users.getByProfile(profile);
 
+const getById = async (userId) => {
+  authInstanceId(userId);
+  return users.getById(userId);
+};
+
 module.exports = {
   create,
   getByProfile,
+  getById,
 };

@@ -13,13 +13,14 @@ teachers.get('/school',
 teachers.post('/class',
   middlewares.authToken, middlewares.authTeacher, controllers.updateClass);
 
+teachers.post('/student',
+  middlewares.authToken, middlewares.authTeacher, controllers.createStudent);
+
 teachers.get('/students',
   middlewares.authToken, middlewares.authTeacher, controllers.getStudentComments);
-teachers.post('/students',
-  middlewares.authToken, middlewares.authTeacher, controllers.createStudent);
 teachers.put('/students',
   middlewares.authToken, middlewares.authTeacher, controllers.updateStudent);
-teachers.delete('/students',
+teachers.delete('/student',
   middlewares.authToken, middlewares.authTeacher, controllers.removeStudent);
 
 module.exports = teachers;

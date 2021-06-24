@@ -1,0 +1,41 @@
+.student-wrapper {
+  background-color: rgba(20, 28, 32, .7);
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 12;
+}
+
+.students {
+  --width: 50vw;
+  position: absolute;
+  left: calc(var(--width) / 2);
+  top: 30%;
+  width: var(--width);
+}
+
+.students button {
+  margin-bottom: 20px;
+}
+
+.students button.remove {
+  align-self: flex-start;
+  font-weight: 700;
+  margin-bottom: 2px;
+  padding: 0 5px;
+}
+
+.single-student {
+  display: flex;
+  margin-top: 4px;
+}
+
+.single-student .teacher {
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+.student-wrapper.hide {
+  display: none;
+}

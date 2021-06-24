@@ -4,15 +4,17 @@ const user = async (action, payload) => {
   try {
     const localhost = process.env.REACT_APP_HOSTNAME || 'localhost:3001';
     let endpoint = '';
+    let data = payload;
     switch (action) {
+    case 'get':
+      endpoint = 'user';
+      data = { userId: payload.userId };
+      break;
     case 'register':
       endpoint = 'user/register';
       break;
     case 'login':
       endpoint = 'login';
-      break;
-    case 'update':
-      endpoint = 'user/edit';
       break;
     default: return null;
     }
@@ -23,7 +25,7 @@ const user = async (action, payload) => {
     const request = {
       method,
       url: `http://${localhost}/${endpoint}`,
-      data: payload,
+      data,
       headers,
     };
     const result = await axios(request);

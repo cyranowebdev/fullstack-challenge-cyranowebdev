@@ -1,11 +1,13 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import Button from './Button';
+import { Button } from '.';
 
 export default function ClassCard({ element, remove }) {
   const { id, schoolId, grade, year,
-    class: name, teachers, comments } = element;
+    class: name, teachers } = element;
+  const comments = (element.comments) ? element.comments : [];
+  const students = (element.students) ? element.students : [];
 
   return (
     <div
@@ -36,6 +38,10 @@ export default function ClassCard({ element, remove }) {
         Observações:
         { (comments)
           ? ` ${comments.length}`
+          : ' 0' }
+        Estudantes:
+        { (students)
+          ? ` ${students.length}`
           : ' 0' }
       </div>
       <Button
