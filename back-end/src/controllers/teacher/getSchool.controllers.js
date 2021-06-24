@@ -8,8 +8,6 @@ module.exports = async (req, res, next) => {
     const result = await teachers.getClasses(userId);
     return res.status(StatusCodes.OK).json(result);
   } catch (err) {
-
-    console.log(err)
     return next({ ...teachersError, err });
   }
 };

@@ -3,6 +3,7 @@ const getStudentComments = require('./getStudentComments.controllers');
 const updateStudent = require('./updateStudent.controllers');
 const removeStudent = require('./removeStudent.controllers');
 const getClasses = require('./getClasses.controllers');
+const getSchool = require('./getSchool.controllers');
 const updateClass = require('./updateClass.controllers');
 
 module.exports = {
@@ -11,5 +12,6 @@ module.exports = {
   updateStudent,
   removeStudent,
   getClasses,
+  getSchool,
   updateClass,
 };

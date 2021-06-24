@@ -5,9 +5,10 @@ const ObjectId = require('mongodb').ObjectID;
 const connection = require('./connection');
 
 const getBySchoolId = async (schoolId) => {
+  const schoolObjId = ObjectId(schoolId);
   const results = await connection()
     .then((db) => db.collection('classes').aggregate([
-      { $match: { schoolId } },
+      { $match: { schoolId: schoolObjId } },
       {
         $lookup: {
           from: 'users',
@@ -50,20 +51,24 @@ const getBySchoolId = async (schoolId) => {
 };
 
 const getById = async (classId) => {
+  const classObjId = ObjectId(classId);
   const result = await connection()
-    .then((db) => db.collection('classes').findOne({ _id: ObjectId(classId) }));
+    .then((db) => db.collection('classes').findOne({ _id: classObjId }));
 
   return result;
 };
 
 const create = async (newClass) => {
-  const teachers = newClass.teachers.map((teacher) => {
-    if (teacher) return ObjectId(teacher);
-    return null;
-  });
-  const createClass = { ...newClass, teachers };
+  const objClass = {
+    ...newClass,
+    schoolId: ObjectId(newClass.schoolId),
+    teachers: newClass.teachers.map((teacher) => {
+      if (teacher) return ObjectId(teacher);
+      return null;
+    }),
+  };
   const result = await connection()
-    .then((db) => db.collection('classes').insertOne(createClass));
+    .then((db) => db.collection('classes').insertOne(objClass));
   if (result) {
       const classCreated = { ...result.ops[0] };
       return classCreated;
@@ -103,20 +108,73 @@ const remove = async (classId) => {
 };
 
 const addComment = async (payload, userId) => {
-  const newComment = { msg: payload.msg, teacher: userId };
+  const newComment = { msg: payload.msg, teacher: ObjectId(userId) };
+  const classObjId = ObjectId(payload.classId);
   const { matchedCount, result: { nModified } } = await connection()
     .then((db) => db.collection('classes').updateOne(
-      { _id: ObjectId(payload.classId) },
+      { _id: classObjId },
       { $push: { comments: newComment } },
     ));
   if (matchedCount === 0) return null;
   return (nModified > 0) ? newComment : 0;
 };
 
+const getByTeacher = async (teacherId) => {
+  const teacherObjId = ObjectId(teacherId);
+  const results = await connection()
+    .then((db) => db.collection('classes').aggregate([
+      { $match: { teachers: teacherObjId } },
+      {
+        $lookup: {
+          from: 'schools',
+          localField: 'schoolId',
+          foreignField: '_id',
+          as: 'school',
+        },
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'teachers',
+          foreignField: '_id',
+          as: 'teachers',
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          school: 1,
+          year: 1,
+          class: 1,
+          grade: 1,
+          teachers: 1,
+          students: 1,
+          comments: 1,
+        },
+      },
+    ]).toArray());
+
+  const cleanResults = [];
+  results.forEach((result) => {
+    const resultTeachers = result.teachers.map((teacher) => ({
+      id: teacher._id,
+      name: teacher.name,
+      email: teacher.email,
+    }));
+    cleanResults.push({
+      ...result,
+      teachers: resultTeachers,
+    });
+  });
+
+  return cleanResults;
+};
+
 module.exports = {
   addComment,
   getBySchoolId,
   getById,
+  getByTeacher,
   create,
   update,
   remove,
