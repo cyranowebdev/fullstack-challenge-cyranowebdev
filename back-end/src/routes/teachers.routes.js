@@ -20,7 +20,7 @@ teachers.get('/students',
   middlewares.authToken, middlewares.authTeacher, controllers.getStudentComments);
 teachers.put('/students',
   middlewares.authToken, middlewares.authTeacher, controllers.updateStudent);
-teachers.delete('/students',
+teachers.delete('/student',
   middlewares.authToken, middlewares.authTeacher, controllers.removeStudent);
 
 module.exports = teachers;

@@ -11,6 +11,7 @@ const AppProvider = ({ children }) => {
   const [classes, setClasses] = useState();
   const [students, setStudents] = useState();
   const [addStudent, setAddStudent] = useState();
+  const [classId, setClassId] = useState();
   const [comments, setComments] = useState();
   const [targetComment, setTargetComment] = useState();
   const updateLogin = useStorage('login');
@@ -32,6 +33,9 @@ const AppProvider = ({ children }) => {
   const addStudentContext = useMemo(() => (
     { addStudent, setAddStudent }), [addStudent, setAddStudent]);
 
+  const classIdContext = useMemo(() => (
+    { classId, setClassId }), [classId, setClassId]);
+
   const commentsContext = useMemo(() => (
     { comments, setComments }), [comments, setComments]);
 
@@ -48,6 +52,7 @@ const AppProvider = ({ children }) => {
         classesContext,
         studentsContext,
         addStudentContext,
+        classIdContext,
         commentsContext,
         targetCommentContext,
         tokenContext,

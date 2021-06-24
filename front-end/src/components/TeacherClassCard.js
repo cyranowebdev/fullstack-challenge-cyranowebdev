@@ -8,6 +8,7 @@ export default function ClassCard({ element }) {
   const { commentsContext: { setComments },
     studentsContext: { setStudents },
     addStudentContext: { setAddStudent },
+    classIdContext: { setClassId },
     targetCommentContext: { setTargetComment } } = useContext(AppContext);
   const { id, grade, year, class: name, teachers } = element;
   const currComments = (element.comments) ? element.comments : [];
@@ -58,7 +59,10 @@ export default function ClassCard({ element }) {
         <Button
           label="Ver"
           className="status warning"
-          callback={ () => setStudents(students) }
+          callback={ () => {
+            setClassId(id);
+            setStudents(students);
+          } }
           disabled={ (students.length < 1) }
         />
         <Button

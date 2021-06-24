@@ -18,7 +18,7 @@ export default function AddComment() {
     await api.teacher.saveComment(token, payload);
     setTargetComment();
     window.location.reload();
-  }, [msg, targetComment, setTargetComment, token]);
+  }, [targetComment, msg, setTargetComment, token]);
 
   const commentsWrapper = 'comment-wrapper';
   const commentsClass = 'comments';
